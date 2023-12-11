@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3s - PassGen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: small;
+      margin: 0;
+      padding: 5px;
+      background-color: #333; /* Background color for the entire page */
+      color: #fff; /* Text color */
+    }
+    h1 {
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #444; /* Background color for the form container */
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      height: 31px;
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: #555; /* Input background color */
+      color: #fff; /* Input text color */
+      border: none;
+      border-radius: 5px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .corner-buttons {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Password Generator Tool</h1>
+<hr>
+<div class="container">
+  <form method="POST" action="{{ url_for('post') }}">
+    <div class="form-group">
+      <label>ID:</label>
+      <input type="text" id="client_id" name="client_id" placeholder="Enter ID">
+    </div>    
+
+    <div class="form-group">
+      <label>Location:</label>
+      <input type="text" id="location" name="location" placeholder="Enter location">
+    </div>
+
+    <div class="form-group">
+      <label>Client Name:</label>
+      <input type="text" id="clientName" name="clientName" placeholder="Enter client name">
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter phone number">
+    </div>
+
+    <div class="form-group">
+      <label>Anydesk Number:</label>
+      <input type="tel" id="anydesk" name="anydesk" placeholder="Enter anydesk number">
+    </div>
+
+    <div class="form-group">
+      <label>Generated Password:</label>
+      <input type="text" id="generatedPassword" name="generatedPassword" placeholder="Generated password" readonly>
+    </div>
+
+    <button class="btn" type="button" onclick="generatePassword()">Generate</button>
+    <button class="btn" type="submit">Save</button>
+  </form>
+</div>
+
+<div class="corner-buttons">
+  <button class="btn" onclick="logOut()">Log Out</button>
+  <button class="btn" id="nextButton" onclick="navigateToTable()">Data List</button>
+
+</div>
+<script>
+  function generatePassword() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let password = '';
+    for (let i = 0; i < 32; i++) {
+      password += characters.charAt(Math.floor(Math.random() * characters.length));
+      if (i === 7 || i === 11 || i === 15 || i === 19) {
+        password += '-';
+      }
+    }
+    document.getElementById('generatedPassword').value = password;
+  }
+
+  function navigateToTable() {
+    window.location.href = '/table';
+  }
+
+  function logOut() {
+    // Replace "pageURL" with the URL of the page you want to navigate to
+    window.location.href = "/logout";
+  }
+</script>
+</body>
+</html>

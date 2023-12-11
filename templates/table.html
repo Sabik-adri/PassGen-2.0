@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3s - PassGen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #333; /* Background color for the entire page */
+            color: #fff; /* Text color */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #444; /* Background color for the container */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .passwords-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .passwords-table th,
+        .passwords-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #666; /* Darker border color */
+            color: #fff; /* Text color */
+        }
+
+        .passwords-table th {
+            background-color: #555; /* Header background color */
+            font-weight: bold;
+        }
+
+        .passwords-table tbody tr:hover {
+            background-color: #666; /* Darker hover background color */
+        }
+
+        #searchInput {
+            width: 70%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            position: center;
+            background-color: #555; /* Input background color */
+            color: #fff; /* Input text color */
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Passwords Table</h1>
+        <input type="text" id="searchInput" placeholder="Search by ID, Location, or Client Name" onkeyup="searchTable()">
+        <table class="passwords-table" id="passwordsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Location</th>
+              <th>Client Name</th>
+              <th>Phone Number</th>
+              <th>Anydesk Number</th>
+              <th>Generated Password</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in data %}
+            <tr>
+              <td>{{ entry.client_id }}</td>
+              <td>{{ entry.location }}</td>
+              <td>{{ entry.clientName }}</td>
+              <td>{{ entry.phone }}</td>
+              <td>{{ entry.anydesk }}</td>
+              <td>{{ entry.generatedPassword }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+                    <script>
+                        function searchTable() {
+                            let input, filter, table, tr, td, i, j, txtValue;
+                            input = document.getElementById('searchInput');
+                            filter = input.value.toUpperCase();
+                            table = document.getElementById('passwordsTable');
+                            tr = table.getElementsByTagName('tr');
+
+                            for (i = 1; i < tr.length; i++) {  // Start from 1 to skip the header row
+                                td = tr[i].getElementsByTagName('td');
+                                let found = false;
+
+                                for (j = 0; j < td.length; j++) {
+                                    if (td[j]) {
+                                        txtValue = td[j].textContent || td[j].innerText;
+                                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (found) {
+                                    tr[i].style.display = '';
+                                } else {
+                                    tr[i].style.display = 'none';
+                                }
+                            }
+                        }
+
+                    </script>
+</body>
+
+</html>

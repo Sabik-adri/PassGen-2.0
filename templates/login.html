@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+  text-align: center;
+  color: #333333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  color: #555555;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  font-size: 16px;
+  color: #333333;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.button-container button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #337ab7;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-container button[type="submit"]:hover {
+  background-color: #cfdeec;
+}
+
+.button-container button[type="submit"]:focus {
+  outline: none;
+}
+
+    .heading {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  </style>
+  <title>3S - PassGen</title>
+</head>
+<body>
+  <div class="container">
+    <h1 class="heading">3S PS_DB</h1>
+    <h2>Login Form</h2>
+    <form action="{{ url_for('login') }}" method="post">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+      </div>
+      <div class="button-container">
+        <button type="submit" id="submit">Log in</button>
+      </div>
+    </form>
+    
+  </div>
+</body>
+</html>
